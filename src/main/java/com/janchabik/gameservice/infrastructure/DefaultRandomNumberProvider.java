@@ -1,12 +1,12 @@
 package com.janchabik.gameservice.infrastructure;
 
-import com.janchabik.gameservice.domain.RandomNumberProvider;
+import com.janchabik.gameservice.domain.utils.RandomNumberProvider;
 import java.util.Random;
 
 /*
  * This service has been added mostly for testing purposes.
  * Injecting this component allows testing for different random numbers, instead of relying
- * on java.util.Random someday generating a number that will break a given test case
+ * on java.util.Random someday generating a number that will break a given test case;
  * */
 public class DefaultRandomNumberProvider implements RandomNumberProvider {
 

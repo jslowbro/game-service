@@ -7,16 +7,21 @@ import java.util.List;
 
 public class Round {
 
+	private final int gameId;
+
 	private final List<RoundEvent> roundEvents = new ArrayList<>();
 
 	private int cashDifferenceAfterRound = 0;
 
 	private int numberOfFreeRoundsWon = 0;
 
-	public RoundOutCome playRound(int betAmount, BetDeductionPolicy betDeductionPolicy, OutComeCalculationStrategy outComeCalculationStrategy) {
+	public Round(int gameId) {
+		this.gameId = gameId;
+	}
+
+	public void playRound(int betAmount, BetDeductionPolicy betDeductionPolicy, OutComeCalculationStrategy outComeCalculationStrategy) {
 		deductBalance(betAmount, betDeductionPolicy);
 		playRound(betAmount, outComeCalculationStrategy);
-		return new RoundOutCome(cashDifferenceAfterRound, numberOfFreeRoundsWon);
 	}
 
 	private void playRound(int betAmount, OutComeCalculationStrategy outComeCalculationStrategy) {
@@ -51,4 +56,11 @@ public class Round {
 		return returnValue;
 	}
 
+	public int getCashDifferenceAfterRound() {
+		return cashDifferenceAfterRound;
+	}
+
+	public int getNumberOfFreeRoundsWon() {
+		return numberOfFreeRoundsWon;
+	}
 }

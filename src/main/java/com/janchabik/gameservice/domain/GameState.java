@@ -10,31 +10,41 @@ public class GameState {
 
 	private final int gameId;
 
-	private final String userId;
-
 	private int numberOfFreeRounds;
 
 	private int cashBalance;
 
-	public GameState(int gameId, String userId, int cashBalance, int numberOfFreeRounds) {
+	public GameState(int gameId, int cashBalance, int numberOfFreeRounds) {
 		this.gameId = gameId;
-		this.userId = userId;
+		if (cashBalance < 0) {
+			throw new IllegalArgumentException("Starting cash balance cannot be negative");
+		}
 		this.cashBalance = cashBalance;
 		this.numberOfFreeRounds = numberOfFreeRounds;
 	}
 
-	public static GameState startGame(int gameId, String userId) {
-		return new GameState(gameId, userId, DEFAULT_STARTING_CASH_BALANCE, DEFAULT_NUMBER_OF_FREE_ROUNDS);
+	public static GameState startGame(int gameId) {
+		return new GameState(gameId, DEFAULT_STARTING_CASH_BALANCE, DEFAULT_NUMBER_OF_FREE_ROUNDS);
 	}
 
-	public void applyRoundOutCome(RoundOutCome roundOutCome) {
-		numberOfFreeRounds = numberOfFreeRounds - 1;
-		numberOfFreeRounds = numberOfFreeRounds + roundOutCome.getFreeRoundsWon();
-		cashBalance = cashBalance + roundOutCome.getCashBalanceDifference();
+	public void applyRoundOutCome(int cashBalanceDifference, int freeRoundsWon) {
+		int newNumberOfFreeRounds = numberOfFreeRounds - 1 + freeRoundsWon;
+		int newCashBalance = cashBalance + cashBalanceDifference;
+		validate(freeRoundsWon, newNumberOfFreeRounds, newCashBalance);
+		numberOfFreeRounds = newNumberOfFreeRounds;
+		cashBalance = newCashBalance;
 	}
 
-	public String getUserId() {
-		return userId;
+	private void validate(int freeRoundsWon, int newNumberOfFreeRounds, int newCashBalance) {
+		if (freeRoundsWon < 0) {
+			throw new IllegalArgumentException("Cannot win negative free rounds");
+		}
+		if (newNumberOfFreeRounds < 0) {
+			throw new IllegalArgumentException("Cannot go into negative free rounds");
+		}
+		if (newCashBalance < 0) {
+			throw new IllegalArgumentException("Cannot go into a negative cash balance");
+		}
 	}
 
 	public int getCashBalance() {
@@ -56,12 +66,11 @@ public class GameState {
 		GameState gameState = (GameState) o;
 		return gameId == gameState.gameId &&
 				cashBalance == gameState.cashBalance &&
-				numberOfFreeRounds == gameState.numberOfFreeRounds
-				&& Objects.equals(userId, gameState.userId);
+				numberOfFreeRounds == gameState.numberOfFreeRounds;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(gameId, userId, cashBalance, numberOfFreeRounds);
+		return Objects.hash(gameId, cashBalance, numberOfFreeRounds);
 	}
 }

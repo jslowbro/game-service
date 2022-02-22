@@ -1,5 +1,6 @@
 package com.janchabik.gameservice.domain;
 
+// TODO add timestamps for better tracking
 public interface RoundEvent {
 
 	Type getType();
