@@ -1,4 +1,4 @@
-package com.janchabik.gameservice.domain.betdeduction;
+package com.janchabik.gameservice.domain.model.betdeduction;
 
 public class PlayingForCashRoundBetDeductionPolicy implements BetDeductionPolicy {
 

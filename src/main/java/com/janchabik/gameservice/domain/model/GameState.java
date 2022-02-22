@@ -1,9 +1,9 @@
-package com.janchabik.gameservice.domain;
+package com.janchabik.gameservice.domain.model;
 
-import com.janchabik.gameservice.domain.betdeduction.BetDeductionPolicy;
-import com.janchabik.gameservice.domain.betdeduction.FreeRoundBetDeductionPolicy;
-import com.janchabik.gameservice.domain.betdeduction.PlayingForCashRoundBetDeductionPolicy;
-import com.janchabik.gameservice.domain.betdeduction.PlayingForFreeBetDeductionPolicy;
+import com.janchabik.gameservice.domain.model.betdeduction.BetDeductionPolicy;
+import com.janchabik.gameservice.domain.model.betdeduction.FreeRoundBetDeductionPolicy;
+import com.janchabik.gameservice.domain.model.betdeduction.PlayingForCashRoundBetDeductionPolicy;
+import com.janchabik.gameservice.domain.model.betdeduction.PlayingForFreeBetDeductionPolicy;
 import java.util.Objects;
 
 // TODO add aggregate version
@@ -62,6 +62,10 @@ public final class GameState {
 
 	public int getGameId() {
 		return gameId;
+	}
+
+	public GameStateMemento memento() {
+		return new GameStateMemento(gameId, numberOfFreeRounds, cashBalance);
 	}
 
 	@Override

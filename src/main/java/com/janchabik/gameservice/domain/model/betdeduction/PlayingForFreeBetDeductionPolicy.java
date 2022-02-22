@@ -1,4 +1,4 @@
-package com.janchabik.gameservice.domain.betdeduction;
+package com.janchabik.gameservice.domain.model.betdeduction;
 
 // This is different from PlayingForFreeBetDeductionPolicy for auditing purposes
 public class PlayingForFreeBetDeductionPolicy implements BetDeductionPolicy {

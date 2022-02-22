@@ -1,4 +1,4 @@
-package com.janchabik.gameservice.domain;
+package com.janchabik.gameservice.domain.model;
 
 // TODO add timestamps for better tracking
 public interface RoundEvent {

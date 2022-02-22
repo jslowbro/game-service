@@ -1,4 +1,4 @@
-package com.janchabik.gameservice.domain.outcomecalculation;
+package com.janchabik.gameservice.domain.model.outcomecalculation;
 
 import com.janchabik.gameservice.domain.utils.RandomNumberProvider;
 

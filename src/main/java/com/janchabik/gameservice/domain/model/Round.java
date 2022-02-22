@@ -1,8 +1,8 @@
-package com.janchabik.gameservice.domain;
+package com.janchabik.gameservice.domain.model;
 
-import com.janchabik.gameservice.domain.betdeduction.BetDeductionPolicy;
-import com.janchabik.gameservice.domain.outcomecalculation.OutComeCalculationStrategy;
-import com.janchabik.gameservice.domain.outcomecalculation.Outcome;
+import com.janchabik.gameservice.domain.model.betdeduction.BetDeductionPolicy;
+import com.janchabik.gameservice.domain.model.outcomecalculation.OutComeCalculationStrategy;
+import com.janchabik.gameservice.domain.model.outcomecalculation.Outcome;
 import java.util.ArrayList;
 import java.util.List;
 
