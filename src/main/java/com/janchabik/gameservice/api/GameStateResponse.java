@@ -1,8 +1,8 @@
-package com.janchabik.gameservice.domain.model;
+package com.janchabik.gameservice.api;
 
 import java.util.Objects;
 
-public class GameStateMemento {
+public class GameStateResponse {
 
 	private final int gameId;
 
@@ -10,33 +10,22 @@ public class GameStateMemento {
 
 	private final int cashBalance;
 
-	public GameStateMemento(int gameId, int numberOfFreeRounds, int cashBalance) {
+	public GameStateResponse(int gameId, int numberOfFreeRounds, int cashBalance) {
 		this.gameId = gameId;
 		this.numberOfFreeRounds = numberOfFreeRounds;
 		this.cashBalance = cashBalance;
 	}
 
-	public int getGameId() {
-		return gameId;
-	}
-
-	public int getNumberOfFreeRounds() {
-		return numberOfFreeRounds;
-	}
-
-	public int getCashBalance() {
-		return cashBalance;
-	}
-
 	@Override
 	public boolean equals(Object o) {
+
 		if (this == o) {
 			return true;
 		}
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		GameStateMemento that = (GameStateMemento) o;
+		GameStateResponse that = (GameStateResponse) o;
 		return gameId == that.gameId && numberOfFreeRounds == that.numberOfFreeRounds && cashBalance == that.cashBalance;
 	}
 
