@@ -1,8 +1,9 @@
-package com.janchabik.gameservice.infrastructure;
+package com.janchabik.gameservice.infrastructure.repositories;
 
 import com.janchabik.gameservice.UserContext;
 import com.janchabik.gameservice.domain.model.GameState;
 import com.janchabik.gameservice.domain.services.ports.GameStateRepository;
+import com.janchabik.gameservice.infrastructure.configurable.GameConfigurationProvider;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;

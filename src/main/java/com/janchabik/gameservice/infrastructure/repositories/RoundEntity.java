@@ -1,4 +1,4 @@
-package com.janchabik.gameservice.infrastructure;
+package com.janchabik.gameservice.infrastructure.repositories;
 
 import java.util.Objects;
 

@@ -1,4 +1,4 @@
-package com.janchabik.gameservice.domain.utils;
+package com.janchabik.gameservice.domain.services.ports;
 
 public interface RandomNumberProvider {
 

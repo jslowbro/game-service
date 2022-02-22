@@ -1,9 +1,10 @@
-package com.janchabik.gameservice.infrastructure;
+package com.janchabik.gameservice.infrastructure.repositories;
 
 import com.janchabik.gameservice.UserContext;
 import com.janchabik.gameservice.domain.model.Round;
 import com.janchabik.gameservice.domain.model.RoundEvent;
 import com.janchabik.gameservice.domain.services.ports.RoundRepository;
+import com.janchabik.gameservice.infrastructure.configurable.GameConfigurationProvider;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

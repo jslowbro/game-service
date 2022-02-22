@@ -1,6 +1,6 @@
-package com.janchabik.gameservice.infrastructure;
+package com.janchabik.gameservice.infrastructure.configurable;
 
-import com.janchabik.gameservice.domain.utils.RandomNumberProvider;
+import com.janchabik.gameservice.domain.services.ports.RandomNumberProvider;
 import java.util.Random;
 
 /*

@@ -2,7 +2,7 @@ package com.janchabik.gameservice.domain.outcomecalculation
 
 import com.janchabik.gameservice.domain.model.outcomecalculation.DefaultOutComeCalculationStrategy
 import com.janchabik.gameservice.domain.model.outcomecalculation.Outcome
-import com.janchabik.gameservice.domain.utils.RandomNumberProvider
+import com.janchabik.gameservice.domain.services.ports.RandomNumberProvider
 import spock.lang.Specification
 import spock.lang.Unroll
 

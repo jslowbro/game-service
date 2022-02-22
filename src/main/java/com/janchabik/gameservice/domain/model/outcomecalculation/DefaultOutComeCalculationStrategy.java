@@ -1,6 +1,6 @@
 package com.janchabik.gameservice.domain.model.outcomecalculation;
 
-import com.janchabik.gameservice.domain.utils.RandomNumberProvider;
+import com.janchabik.gameservice.domain.services.ports.RandomNumberProvider;
 
 public class DefaultOutComeCalculationStrategy implements OutComeCalculationStrategy {
 

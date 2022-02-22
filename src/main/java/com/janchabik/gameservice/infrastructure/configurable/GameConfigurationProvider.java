@@ -1,4 +1,4 @@
-package com.janchabik.gameservice.infrastructure;
+package com.janchabik.gameservice.infrastructure.configurable;
 
 import org.springframework.stereotype.Component;
 
