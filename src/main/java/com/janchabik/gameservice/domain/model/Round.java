@@ -52,7 +52,7 @@ public final class Round {
 
 	private void addWonFreeRounds(int wonRounds) {
 		numberOfFreeRoundsWon += wonRounds;
-		emit(new RoundEvent.RoundsWonEvent(wonRounds));
+		emit(new RoundEvent.FreeRoundsWonEvent(wonRounds));
 	}
 
 	private void addCashPrize(int wonCashAmount) {

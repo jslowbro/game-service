@@ -15,7 +15,7 @@ Content-Type: application/json
 
 {
 	"userId": "Jan",
-	"betAmount": 10
+	"betAmount": 5
 }
 
 
@@ -27,3 +27,10 @@ Content-Type: application/json
 	"userId": "Jan",
 	"betAmount": 5
 }
+
+
+###
+GET http://localhost:3000/game-history/user/Jan
+Content-Type: application/json
+
+

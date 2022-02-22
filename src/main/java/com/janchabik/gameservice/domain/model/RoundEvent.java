@@ -44,16 +44,24 @@ public interface RoundEvent {
 		public Type getType() {
 			return type;
 		}
+
+		public int getCashWonAmount() {
+			return cashWonAmount;
+		}
 	}
 
-	class RoundsWonEvent implements RoundEvent {
+	class FreeRoundsWonEvent implements RoundEvent {
 
 		private static final Type type = Type.FREE_ROUNDS_WON;
 
 		private final int freeRoundsWon;
 
-		public RoundsWonEvent(int freeRoundsWon) {
+		public FreeRoundsWonEvent(int freeRoundsWon) {
 			this.freeRoundsWon = freeRoundsWon;
+		}
+
+		public int getFreeRoundsWon() {
+			return freeRoundsWon;
 		}
 
 		@Override

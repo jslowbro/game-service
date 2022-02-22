@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -35,5 +36,29 @@ public class RoundRepositoryImpl implements RoundRepository {
 		RoundEntity roundEntity = new RoundEntity(UserContext.getUserId(), roundMap.size(), gameId);
 		roundMap.put(roundEntity, new ArrayList<>());
 		return new Round(roundEntity.getRoundId(), gameConfigurationProvider.getMinBet(), gameConfigurationProvider.getMaxBet());
+	}
+
+	@Override
+	public List<RoundEvent> getRoundEventsForPlayer(String userId) {
+		return roundMap.entrySet().stream()
+				.filter(e -> e.getKey().getUserId().equals(userId))
+				.flatMap(e -> e.getValue().stream())
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<RoundEvent> getRoundEventsForGame(int gameId) {
+		return roundMap.entrySet().stream()
+				.filter(e -> e.getKey().getGameId() == gameId)
+				.flatMap(e -> e.getValue().stream())
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<RoundEvent> getRoundEventsForRound(int roundId) {
+		return roundMap.entrySet().stream()
+				.filter(e -> e.getKey().getGameId() == roundId)
+				.flatMap(e -> e.getValue().stream())
+				.collect(Collectors.toList());
 	}
 }
