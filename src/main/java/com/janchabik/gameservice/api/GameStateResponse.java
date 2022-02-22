@@ -16,6 +16,18 @@ public class GameStateResponse {
 		this.cashBalance = cashBalance;
 	}
 
+	public int getGameId() {
+		return gameId;
+	}
+
+	public int getNumberOfFreeRounds() {
+		return numberOfFreeRounds;
+	}
+
+	public int getCashBalance() {
+		return cashBalance;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 
