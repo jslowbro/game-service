@@ -1,8 +1,9 @@
 package com.janchabik.gameservice.domain.betdeduction;
 
+// This is different from PlayingForFreeBetDeductionPolicy for auditing purposes
 public class PlayingForFreeBetDeductionPolicy implements BetDeductionPolicy {
 
-	private static final PlayingForFreeBetDeductionPolicy INSTANCE = new PlayingForFreeBetDeductionPolicy();
+	public static final PlayingForFreeBetDeductionPolicy INSTANCE = new PlayingForFreeBetDeductionPolicy();
 
 	private PlayingForFreeBetDeductionPolicy() { }
 

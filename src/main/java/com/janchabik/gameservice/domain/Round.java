@@ -5,9 +5,14 @@ import com.janchabik.gameservice.domain.outcomecalculation.OutComeCalculationStr
 import java.util.ArrayList;
 import java.util.List;
 
-public class Round {
+// TODO add aggregate version
+public final class Round {
 
-	private final int gameId;
+	private final int roundId;
+
+	private final int minBetAmount;
+
+	private final int maxBetAmount;
 
 	private final List<RoundEvent> roundEvents = new ArrayList<>();
 
@@ -15,16 +20,27 @@ public class Round {
 
 	private int numberOfFreeRoundsWon = 0;
 
-	public Round(int gameId) {
-		this.gameId = gameId;
+	public Round(int roundId, int minBetAmount, int maxBetAmount) {
+		this.roundId = roundId;
+		if (minBetAmount <= 0) {
+			throw new IllegalArgumentException("Min bet amount cannot be lower than 0");
+		}
+		if (maxBetAmount <= 0) {
+			throw new IllegalArgumentException("Max bet amount cannot be lower than 0");
+		}
+		if (maxBetAmount < minBetAmount) {
+			throw new IllegalArgumentException("Max bet amount cant be lower than min bet amount");
+		}
+		this.minBetAmount = minBetAmount;
+		this.maxBetAmount = maxBetAmount;
 	}
 
 	public void playRound(int betAmount, BetDeductionPolicy betDeductionPolicy, OutComeCalculationStrategy outComeCalculationStrategy) {
 		deductBalance(betAmount, betDeductionPolicy);
-		playRound(betAmount, outComeCalculationStrategy);
+		applyRoundOutCome(betAmount, outComeCalculationStrategy);
 	}
 
-	private void playRound(int betAmount, OutComeCalculationStrategy outComeCalculationStrategy) {
+	private void applyRoundOutCome(int betAmount, OutComeCalculationStrategy outComeCalculationStrategy) {
 		OutComeCalculationStrategy.Outcome roundOutCome = outComeCalculationStrategy.calculateGameOutCome(betAmount);
 		addCashPrize(roundOutCome.getWonCashAmount());
 		addWonFreeRounds(roundOutCome.getNumberOfWonFreeRounds());
@@ -62,5 +78,9 @@ public class Round {
 
 	public int getNumberOfFreeRoundsWon() {
 		return numberOfFreeRoundsWon;
+	}
+
+	public int getRoundId() {
+		return roundId;
 	}
 }

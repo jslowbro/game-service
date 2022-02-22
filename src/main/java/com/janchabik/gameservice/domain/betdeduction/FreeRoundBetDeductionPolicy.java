@@ -2,7 +2,7 @@ package com.janchabik.gameservice.domain.betdeduction;
 
 public class FreeRoundBetDeductionPolicy implements BetDeductionPolicy {
 
-	private static final FreeRoundBetDeductionPolicy INSTANCE = new FreeRoundBetDeductionPolicy();
+	public static final FreeRoundBetDeductionPolicy INSTANCE = new FreeRoundBetDeductionPolicy();
 
 	@Override
 	public int deductedBalance(int betAmount) {

@@ -1,12 +1,13 @@
 package com.janchabik.gameservice.domain;
 
+import com.janchabik.gameservice.domain.betdeduction.BetDeductionPolicy;
+import com.janchabik.gameservice.domain.betdeduction.FreeRoundBetDeductionPolicy;
+import com.janchabik.gameservice.domain.betdeduction.PlayingForCashRoundBetDeductionPolicy;
+import com.janchabik.gameservice.domain.betdeduction.PlayingForFreeBetDeductionPolicy;
 import java.util.Objects;
 
-public class GameState {
-
-	private static final int DEFAULT_STARTING_CASH_BALANCE = 5000;
-
-	private static final int DEFAULT_NUMBER_OF_FREE_ROUNDS = 0;
+// TODO add aggregate version
+public final class GameState {
 
 	private final int gameId;
 
@@ -23,24 +24,28 @@ public class GameState {
 		this.numberOfFreeRounds = numberOfFreeRounds;
 	}
 
-	public static GameState startGame(int gameId) {
-		return new GameState(gameId, DEFAULT_STARTING_CASH_BALANCE, DEFAULT_NUMBER_OF_FREE_ROUNDS);
-	}
-
 	public void applyRoundOutCome(int cashBalanceDifference, int freeRoundsWon) {
-		int newNumberOfFreeRounds = numberOfFreeRounds - 1 + freeRoundsWon;
+		int newNumberOfFreeRounds = numberOfFreeRounds + freeRoundsWon;
 		int newCashBalance = cashBalance + cashBalanceDifference;
-		validate(freeRoundsWon, newNumberOfFreeRounds, newCashBalance);
+		validate(freeRoundsWon, newCashBalance);
 		numberOfFreeRounds = newNumberOfFreeRounds;
 		cashBalance = newCashBalance;
 	}
 
-	private void validate(int freeRoundsWon, int newNumberOfFreeRounds, int newCashBalance) {
+	public BetDeductionPolicy calculateBetDeductionPolicy(boolean isFreePlay) {
+		if (isFreePlay) {
+			return PlayingForFreeBetDeductionPolicy.INSTANCE;
+		} else if (numberOfFreeRounds > 0) {
+			numberOfFreeRounds--;
+			return FreeRoundBetDeductionPolicy.INSTANCE;
+		} else {
+			return PlayingForCashRoundBetDeductionPolicy.INSTANCE;
+		}
+	}
+
+	private void validate(int freeRoundsWon, int newCashBalance) {
 		if (freeRoundsWon < 0) {
 			throw new IllegalArgumentException("Cannot win negative free rounds");
-		}
-		if (newNumberOfFreeRounds < 0) {
-			throw new IllegalArgumentException("Cannot go into negative free rounds");
 		}
 		if (newCashBalance < 0) {
 			throw new IllegalArgumentException("Cannot go into a negative cash balance");
@@ -53,6 +58,10 @@ public class GameState {
 
 	public int getNumberOfFreeRounds() {
 		return numberOfFreeRounds;
+	}
+
+	public int getGameId() {
+		return gameId;
 	}
 
 	@Override
