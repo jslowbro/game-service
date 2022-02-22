@@ -4,7 +4,7 @@ import com.janchabik.gameservice.domain.model.Round;
 
 public interface RoundRepository {
 
-	void save(Round round);
+	void save(Round round, int gameId);
 
 	Round newRound(int gameId);
 

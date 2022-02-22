@@ -7,7 +7,7 @@ public interface GameStateRepository {
 
 	Optional<GameState> findGameForUser(String userId);
 
-	GameState newGame(String userId);
+	GameState newGame();
 
 	GameState save(GameState gameState);
 

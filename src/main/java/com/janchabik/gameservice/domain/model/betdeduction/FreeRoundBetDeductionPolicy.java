@@ -4,6 +4,9 @@ public class FreeRoundBetDeductionPolicy implements BetDeductionPolicy {
 
 	public static final FreeRoundBetDeductionPolicy INSTANCE = new FreeRoundBetDeductionPolicy();
 
+	private FreeRoundBetDeductionPolicy() {
+	}
+
 	@Override
 	public int deductedBalance(int betAmount) {
 		return 0;

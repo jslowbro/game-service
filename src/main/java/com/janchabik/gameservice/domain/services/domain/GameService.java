@@ -4,9 +4,9 @@ import com.janchabik.gameservice.domain.model.GameStateMemento;
 
 public interface GameService {
 
-	GameStateMemento startGame(String userId);
+	GameStateMemento startGame();
 
-	GameStateMemento playFreeRound(String userId, int betAmount);
+	GameStateMemento playFreeRound(int betAmount);
 
-	GameStateMemento playCashRound(String userId, int betAmount);
+	GameStateMemento playCashRound(int betAmount);
 }

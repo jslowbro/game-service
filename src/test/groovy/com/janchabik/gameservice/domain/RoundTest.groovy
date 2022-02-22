@@ -1,9 +1,10 @@
 package com.janchabik.gameservice.domain
 
-import com.janchabik.gameservice.domain.betdeduction.FreeRoundBetDeductionPolicy
-import com.janchabik.gameservice.domain.betdeduction.PlayingForCashRoundBetDeductionPolicy
-import com.janchabik.gameservice.domain.betdeduction.PlayingForFreeBetDeductionPolicy
+
 import com.janchabik.gameservice.domain.model.Round
+import com.janchabik.gameservice.domain.model.betdeduction.FreeRoundBetDeductionPolicy
+import com.janchabik.gameservice.domain.model.betdeduction.PlayingForCashRoundBetDeductionPolicy
+import com.janchabik.gameservice.domain.model.betdeduction.PlayingForFreeBetDeductionPolicy
 import com.janchabik.gameservice.domain.model.outcomecalculation.OutComeCalculationStrategy
 import com.janchabik.gameservice.domain.model.outcomecalculation.Outcome
 import spock.lang.Specification
