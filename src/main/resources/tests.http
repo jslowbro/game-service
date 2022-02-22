@@ -1,9 +1,4 @@
 
-###
-GET http://localhost:3000/hello
-Content-Type: application/json
-
-
 
 ###
 POST http://localhost:3000/game/startGame
@@ -20,5 +15,15 @@ Content-Type: application/json
 
 {
 	"userId": "Jan",
-	"betAmount": 19
+	"betAmount": 10
+}
+
+
+###
+POST http://localhost:3000/game/round/playForFree
+Content-Type: application/json
+
+{
+	"userId": "Jan",
+	"betAmount": 5
 }

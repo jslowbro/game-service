@@ -27,4 +27,11 @@ public class GameResource {
 		UserContext.setContext(playRoundRequest.getUserId());
 		return gameApiService.playCashRound(playRoundRequest.getBetAmount());
 	}
+
+
+	@PostMapping("/game/round/playForFree")
+	public GameStateResponse playRoundForFree(@RequestBody PlayRoundRequest playRoundRequest) {
+		UserContext.setContext(playRoundRequest.getUserId());
+		return gameApiService.playFreeRound(playRoundRequest.getBetAmount());
+	}
 }
