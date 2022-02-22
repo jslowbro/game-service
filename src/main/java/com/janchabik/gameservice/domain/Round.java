@@ -2,6 +2,7 @@ package com.janchabik.gameservice.domain;
 
 import com.janchabik.gameservice.domain.betdeduction.BetDeductionPolicy;
 import com.janchabik.gameservice.domain.outcomecalculation.OutComeCalculationStrategy;
+import com.janchabik.gameservice.domain.outcomecalculation.Outcome;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public final class Round {
 	}
 
 	private void applyRoundOutCome(int betAmount, OutComeCalculationStrategy outComeCalculationStrategy) {
-		OutComeCalculationStrategy.Outcome roundOutCome = outComeCalculationStrategy.calculateGameOutCome(betAmount);
+		Outcome roundOutCome = outComeCalculationStrategy.calculateGameOutCome(betAmount);
 		addCashPrize(roundOutCome.getWonCashAmount());
 		addWonFreeRounds(roundOutCome.getNumberOfWonFreeRounds());
 	}
