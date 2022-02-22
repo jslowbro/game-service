@@ -31,6 +31,16 @@ class RoundTest extends Specification {
 		9         | FreeRoundBetDeductionPolicy.INSTANCE           | mockOutComeCalcStrategy(80, 8)  || 80             || 8
 	}
 	
+	def 'should throw IllegalArgumentException when betAmount is not withing bounds'() {
+		given:
+		def round = new Round(1, 1, 10)
+		when:
+		round.playRound(15, PlayingForCashRoundBetDeductionPolicy.INSTANCE, null)
+		then:
+		thrown(IllegalArgumentException.class)
+		
+	}
+	
 	
 	def 'should throw IllegalArgumentException when minBetAmount is lower than 0'() {
 		when:
