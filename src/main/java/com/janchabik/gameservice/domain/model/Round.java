@@ -37,6 +37,9 @@ public final class Round {
 	}
 
 	public void playRound(int betAmount, BetDeductionPolicy betDeductionPolicy, OutComeCalculationStrategy outComeCalculationStrategy) {
+		if (betAmount <= minBetAmount || betAmount >= maxBetAmount) {
+			throw new IllegalArgumentException("Bet is not withing bounds. Min:" + minBetAmount + " Max: " + maxBetAmount);
+		}
 		deductBalance(betAmount, betDeductionPolicy);
 		applyRoundOutCome(betAmount, outComeCalculationStrategy);
 	}

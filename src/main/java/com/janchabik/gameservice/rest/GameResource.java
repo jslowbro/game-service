@@ -3,7 +3,6 @@ package com.janchabik.gameservice.rest;
 import com.janchabik.gameservice.UserContext;
 import com.janchabik.gameservice.api.GameApiService;
 import com.janchabik.gameservice.api.GameStateResponse;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,13 +17,14 @@ public class GameResource {
 	}
 
 	@PostMapping("/game/startGame")
-	public GameStateResponse gameStateResponse(@RequestBody GameStartMessage gameStartMessage) {
-		UserContext.setContext(gameStartMessage.userId);
+	public GameStateResponse startGame(@RequestBody GameStartMessage gameStartMessage) {
+		UserContext.setContext(gameStartMessage.getUserId());
 		return gameApiService.startGame();
 	}
 
-	@GetMapping("/hello")
-	public String hello() {
-		return "Hello world";
+	@PostMapping("/game/round/playForCash")
+	public GameStateResponse playRoundForCash(@RequestBody PlayRoundRequest playRoundRequest) {
+		UserContext.setContext(playRoundRequest.getUserId());
+		return gameApiService.playCashRound(playRoundRequest.getBetAmount());
 	}
 }
