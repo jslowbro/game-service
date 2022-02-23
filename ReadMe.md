@@ -24,7 +24,7 @@ removed, changed rather easily since domain logic depends only on their interfac
 Readability and reflecting domain over code writing less code. For example PlayingForFreeBetDeductionPolicy and PlayingForFreeBetDeductionPolicy do the same
 thing yet they're different from domain perspective.
 
-# Known limitations
+## Known limitations
 
 DefaultOutComeCalculationPolicy could be made into a generic component that takes betWinningCalculation strategies and their respective percentages.
 
@@ -37,13 +37,13 @@ to add additional tests.
 
 Better api docs could be added OpenAPI/Swagger but I was too lazy to do it. resources/http/requests.http should be enough for most people
 
-# Building and running the project
+## Building and running the project
 
 ./gradlew build
 
 ./gradlew bootRun
 
-# Testing the API
+## Testing the API
 resources/http/requests.http contains sample requests to test the API.
 
 
