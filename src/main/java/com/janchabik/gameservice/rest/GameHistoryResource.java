@@ -30,7 +30,7 @@ public class GameHistoryResource {
 		return gameHistoryService.getRoundEventsForGame(gameId);
 	}
 
-	@GetMapping("/round/{roundId}")
+	@GetMapping("/roundId/{roundId}")
 	public List<RoundDTO> findAllEventsByUserId(@PathVariable Integer roundId) {
 		return gameHistoryService.getRoundEventsForRound(roundId);
 	}

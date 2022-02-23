@@ -33,4 +33,14 @@ Content-Type: application/json
 GET http://localhost:3000/game-history/user/Jan
 Content-Type: application/json
 
+###
+GET http://localhost:3000/game-history/gameId/0
+Content-Type: application/json
+
+
+###
+GET http://localhost:3000/game-history/roundId/2
+Content-Type: application/json
+
+
 
