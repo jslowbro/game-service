@@ -1,8 +1,8 @@
 package com.janchabik.gameservice.domain.services.ports;
 
-import com.janchabik.gameservice.domain.model.outcomecalculation.OutComeCalculationStrategy;
+import com.janchabik.gameservice.domain.model.outcomecalculation.OutComeCalculationPolicy;
 
 public interface OutComeCalculationStrategyFactory {
 
-	OutComeCalculationStrategy getOutComeCalculationStrategy();
+	OutComeCalculationPolicy getOutComeCalculationStrategy();
 }

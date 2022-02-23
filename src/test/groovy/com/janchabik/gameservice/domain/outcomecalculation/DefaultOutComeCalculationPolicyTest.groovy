@@ -1,17 +1,17 @@
 package com.janchabik.gameservice.domain.outcomecalculation
 
-import com.janchabik.gameservice.domain.model.outcomecalculation.DefaultOutComeCalculationStrategy
+import com.janchabik.gameservice.domain.model.outcomecalculation.DefaultOutComeCalculationPolicy
 import com.janchabik.gameservice.domain.model.outcomecalculation.Outcome
 import com.janchabik.gameservice.domain.services.ports.RandomNumberProvider
 import spock.lang.Specification
 import spock.lang.Unroll
 
-class DefaultOutComeCalculationStrategyTest extends Specification {
+class DefaultOutComeCalculationPolicyTest extends Specification {
 	
 	@Unroll
 	def 'should correctly calculate outcome'() {
 		expect:
-		new DefaultOutComeCalculationStrategy(mockRandomNumberProvider(firstRandom, secondRandom)).calculateGameOutCome(betAmount) == new Outcome(cashPrize, freeRoundsWon)
+		new DefaultOutComeCalculationPolicy(mockRandomNumberProvider(firstRandom, secondRandom)).calculateGameOutCome(betAmount) == new Outcome(cashPrize, freeRoundsWon)
 		where:
 		firstRandom | secondRandom | betAmount || cashPrize || freeRoundsWon
 		60          | 75           | 5         || 0         || 0

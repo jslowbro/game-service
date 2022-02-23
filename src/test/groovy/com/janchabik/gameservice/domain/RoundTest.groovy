@@ -5,7 +5,7 @@ import com.janchabik.gameservice.domain.model.Round
 import com.janchabik.gameservice.domain.model.betdeduction.FreeRoundBetDeductionPolicy
 import com.janchabik.gameservice.domain.model.betdeduction.PlayingForCashRoundBetDeductionPolicy
 import com.janchabik.gameservice.domain.model.betdeduction.PlayingForFreeBetDeductionPolicy
-import com.janchabik.gameservice.domain.model.outcomecalculation.OutComeCalculationStrategy
+import com.janchabik.gameservice.domain.model.outcomecalculation.OutComeCalculationPolicy
 import com.janchabik.gameservice.domain.model.outcomecalculation.Outcome
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -80,7 +80,7 @@ class RoundTest extends Specification {
 	
 	
 	def mockOutComeCalcStrategy(int cashPrize, int freeGamesWon) {
-		return Mock(OutComeCalculationStrategy) {
+		return Mock(OutComeCalculationPolicy) {
 			calculateGameOutCome(_) >> new Outcome(cashPrize, freeGamesWon)
 		}
 	}

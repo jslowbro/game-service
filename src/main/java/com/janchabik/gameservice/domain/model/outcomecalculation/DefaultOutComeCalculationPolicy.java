@@ -2,7 +2,7 @@ package com.janchabik.gameservice.domain.model.outcomecalculation;
 
 import com.janchabik.gameservice.domain.services.ports.RandomNumberProvider;
 
-public class DefaultOutComeCalculationStrategy implements OutComeCalculationStrategy {
+public class DefaultOutComeCalculationPolicy implements OutComeCalculationPolicy {
 
 	private final static int MAX_PERCENTAGE = 100;
 
@@ -10,7 +10,7 @@ public class DefaultOutComeCalculationStrategy implements OutComeCalculationStra
 
 	private final RandomNumberProvider randomNumberProvider;
 
-	public DefaultOutComeCalculationStrategy(RandomNumberProvider randomNumberProvider) {
+	public DefaultOutComeCalculationPolicy(RandomNumberProvider randomNumberProvider) {
 		this.randomNumberProvider = randomNumberProvider;
 	}
 

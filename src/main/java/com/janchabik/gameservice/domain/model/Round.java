@@ -1,7 +1,7 @@
 package com.janchabik.gameservice.domain.model;
 
 import com.janchabik.gameservice.domain.model.betdeduction.BetDeductionPolicy;
-import com.janchabik.gameservice.domain.model.outcomecalculation.OutComeCalculationStrategy;
+import com.janchabik.gameservice.domain.model.outcomecalculation.OutComeCalculationPolicy;
 import com.janchabik.gameservice.domain.model.outcomecalculation.Outcome;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,16 +36,16 @@ public final class Round {
 		this.maxBetAmount = maxBetAmount;
 	}
 
-	public void playRound(int betAmount, BetDeductionPolicy betDeductionPolicy, OutComeCalculationStrategy outComeCalculationStrategy) {
+	public void playRound(int betAmount, BetDeductionPolicy betDeductionPolicy, OutComeCalculationPolicy outComeCalculationPolicy) {
 		if (betAmount < minBetAmount || betAmount > maxBetAmount) {
 			throw new IllegalArgumentException("Bet is not withing bounds. Min:" + minBetAmount + " Max: " + maxBetAmount);
 		}
 		deductBalance(betAmount, betDeductionPolicy);
-		applyRoundOutCome(betAmount, outComeCalculationStrategy);
+		applyRoundOutCome(betAmount, outComeCalculationPolicy);
 	}
 
-	private void applyRoundOutCome(int betAmount, OutComeCalculationStrategy outComeCalculationStrategy) {
-		Outcome roundOutCome = outComeCalculationStrategy.calculateGameOutCome(betAmount);
+	private void applyRoundOutCome(int betAmount, OutComeCalculationPolicy outComeCalculationPolicy) {
+		Outcome roundOutCome = outComeCalculationPolicy.calculateGameOutCome(betAmount);
 		addCashPrize(roundOutCome.getWonCashAmount());
 		addWonFreeRounds(roundOutCome.getNumberOfWonFreeRounds());
 	}
