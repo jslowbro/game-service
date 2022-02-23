@@ -8,7 +8,7 @@ public interface RoundApiEvent {
 
 	class BalanceDeductedEvent implements RoundApiEvent {
 
-		public static final Type type = Type.BALANCE_DEDUCTED;
+		public final Type type = Type.BALANCE_DEDUCTED;
 
 		public final int balanceDeducted;
 
@@ -16,7 +16,7 @@ public interface RoundApiEvent {
 			this.balanceDeducted = balanceDeducted;
 		}
 
-		public static Type getType() {
+		public Type getType() {
 			return type;
 		}
 
@@ -27,7 +27,7 @@ public interface RoundApiEvent {
 
 	class CashWonEvent implements RoundApiEvent {
 
-		public static final Type type = Type.CASH_WON;
+		public final Type type = Type.CASH_WON;
 
 		public final int cashWonAmount;
 
@@ -35,7 +35,7 @@ public interface RoundApiEvent {
 			this.cashWonAmount = cashWonAmount;
 		}
 
-		public static Type getType() {
+		public Type getType() {
 			return type;
 		}
 
@@ -46,7 +46,7 @@ public interface RoundApiEvent {
 
 	class FreeRoundsWonEvent implements RoundApiEvent {
 
-		public static final Type type = Type.FREE_ROUNDS_WON;
+		public final Type type = Type.FREE_ROUNDS_WON;
 
 		public final int freeRoundsWon;
 
@@ -54,7 +54,7 @@ public interface RoundApiEvent {
 			this.freeRoundsWon = freeRoundsWon;
 		}
 
-		public static Type getType() {
+		public Type getType() {
 			return type;
 		}
 

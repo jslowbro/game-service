@@ -1,6 +1,9 @@
 package com.janchabik.gameservice.infrastructure.repositories;
 
 import com.janchabik.gameservice.UserContext;
+import com.janchabik.gameservice.api.GameHistoryService;
+import com.janchabik.gameservice.api.RoundApiEvent;
+import com.janchabik.gameservice.api.RoundDTO;
 import com.janchabik.gameservice.domain.model.Round;
 import com.janchabik.gameservice.domain.model.RoundEvent;
 import com.janchabik.gameservice.domain.services.ports.RoundRepository;
@@ -9,12 +12,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RoundRepositoryImpl implements RoundRepository {
+public class RoundRepositoryImpl implements RoundRepository, GameHistoryService {
 
 	private final Map<RoundEntity, List<RoundEvent>> roundMap = new HashMap<>();
 
@@ -39,26 +43,47 @@ public class RoundRepositoryImpl implements RoundRepository {
 	}
 
 	@Override
-	public List<RoundEvent> getRoundEventsForPlayer(String userId) {
-		return roundMap.entrySet().stream()
-				.filter(e -> e.getKey().getUserId().equals(userId))
-				.flatMap(e -> e.getValue().stream())
-				.collect(Collectors.toList());
+	public List<RoundDTO> getRoundEventsForPlayer(String userId) {
+		return findRoundsByPredicate(e -> e.getKey().getUserId().equals(userId));
 	}
 
 	@Override
-	public List<RoundEvent> getRoundEventsForGame(int gameId) {
-		return roundMap.entrySet().stream()
-				.filter(e -> e.getKey().getGameId() == gameId)
-				.flatMap(e -> e.getValue().stream())
-				.collect(Collectors.toList());
+	public List<RoundDTO> getRoundEventsForGame(int gameId) {
+		return findRoundsByPredicate(e -> e.getKey().getGameId() == gameId);
 	}
 
 	@Override
-	public List<RoundEvent> getRoundEventsForRound(int roundId) {
+	public List<RoundDTO> getRoundEventsForRound(int roundId) {
+		return findRoundsByPredicate(e -> e.getKey().getRoundId() == roundId);
+	}
+
+	private List<RoundDTO> findRoundsByPredicate(Predicate<Map.Entry<RoundEntity, List<RoundEvent>>> predicate) {
 		return roundMap.entrySet().stream()
-				.filter(e -> e.getKey().getGameId() == roundId)
-				.flatMap(e -> e.getValue().stream())
-				.collect(Collectors.toList());
+				.filter(predicate)
+				.map(
+						e -> new RoundDTO(
+								e.getKey().getRoundId(),
+								e.getKey().getGameId(),
+								e.getKey().getUserId(),
+								from(e.getValue())
+						)
+				).collect(Collectors.toList());
+	}
+
+	private List<RoundApiEvent> from(List<RoundEvent> roundEvents) {
+		return roundEvents.stream().map(this::toRoundApiEvent).collect(Collectors.toList());
+	}
+
+	private RoundApiEvent toRoundApiEvent(RoundEvent event) {
+		switch (event.getType()) {
+			case BALANCE_DEDUCTED:
+				return new RoundApiEvent.BalanceDeductedEvent(((RoundEvent.BalanceDeductedEvent) event).getBalanceDeducted());
+			case CASH_WON:
+				return new RoundApiEvent.CashWonEvent(((RoundEvent.CashWonEvent) event).getCashWonAmount());
+			case FREE_ROUNDS_WON:
+				return new RoundApiEvent.FreeRoundsWonEvent(((RoundEvent.FreeRoundsWonEvent) event).getFreeRoundsWon());
+			default:
+				throw new IllegalStateException("Unexpected value: " + event.getType());
+		}
 	}
 }
