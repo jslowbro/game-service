@@ -13,11 +13,14 @@ public class RoundDTO {
 
 	private final List<RoundApiEvent> roundApiEventList;
 
-	public RoundDTO(int roundId, int gameId, String userId, List<RoundApiEvent> roundApiEventList) {
+	private final GameStateDTO stateAfterRound;
+
+	public RoundDTO(int roundId, int gameId, String userId, List<RoundApiEvent> roundApiEventList, GameStateDTO stateAfterRound) {
 		this.roundId = roundId;
 		this.gameId = gameId;
 		this.userId = userId;
 		this.roundApiEventList = roundApiEventList;
+		this.stateAfterRound = stateAfterRound;
 	}
 
 	public int getRoundId() {
@@ -34,6 +37,10 @@ public class RoundDTO {
 
 	public String getUserId() {
 		return userId;
+	}
+
+	public GameStateDTO getStateAfterRound() {
+		return stateAfterRound;
 	}
 
 	@Override

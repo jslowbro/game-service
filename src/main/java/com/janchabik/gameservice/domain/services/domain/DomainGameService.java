@@ -74,7 +74,7 @@ public class DomainGameService implements GameService {
 	@Transactional
 	void save(GameState gameState, Round round) {
 		gameStateRepository.save(gameState);
-		roundRepository.save(round, gameState.getGameId());
+		roundRepository.save(round, gameState.memento());
 	}
 
 }

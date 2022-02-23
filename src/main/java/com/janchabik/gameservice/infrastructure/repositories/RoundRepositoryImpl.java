@@ -2,8 +2,10 @@ package com.janchabik.gameservice.infrastructure.repositories;
 
 import com.janchabik.gameservice.UserContext;
 import com.janchabik.gameservice.api.GameHistoryQueries;
+import com.janchabik.gameservice.api.GameStateDTO;
 import com.janchabik.gameservice.api.RoundApiEvent;
 import com.janchabik.gameservice.api.RoundDTO;
+import com.janchabik.gameservice.domain.model.GameStateMemento;
 import com.janchabik.gameservice.domain.model.Round;
 import com.janchabik.gameservice.domain.model.RoundEvent;
 import com.janchabik.gameservice.domain.services.ports.RoundRepository;
@@ -29,8 +31,8 @@ public class RoundRepositoryImpl implements RoundRepository, GameHistoryQueries 
 	}
 
 	@Override
-	public void save(Round round, int gameId) {
-		RoundEntity roundEntity = new RoundEntity(UserContext.getUserId(), round.getRoundId(), gameId);
+	public void save(Round round, GameStateMemento gameStateMemento) {
+		RoundEntity roundEntity = new RoundEntity(UserContext.getUserId(), round.getRoundId(), gameStateMemento.getGameId(), gameStateMemento);
 		roundMap.put(roundEntity, round.flushEvents());
 	}
 
@@ -62,9 +64,13 @@ public class RoundRepositoryImpl implements RoundRepository, GameHistoryQueries 
 								e.getKey().getRoundId(),
 								e.getKey().getGameId(),
 								e.getKey().getUserId(),
-								from(e.getValue())
-						)
+								from(e.getValue()),
+								toDTO(e.getKey().getStateAfterRound()))
 				).collect(Collectors.toList());
+	}
+
+	private GameStateDTO toDTO(GameStateMemento stateAfterRound) {
+		return new GameStateDTO(stateAfterRound.getGameId(), stateAfterRound.getNumberOfFreeRounds(), stateAfterRound.getCashBalance());
 	}
 
 	private List<RoundApiEvent> from(List<RoundEvent> roundEvents) {

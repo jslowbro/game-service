@@ -1,6 +1,6 @@
 
 
-###
+### Start game for player
 POST http://localhost:3000/game/startGame
 Content-Type: application/json
 
@@ -9,17 +9,17 @@ Content-Type: application/json
 }
 
 
-###
+### Play for cash
 POST http://localhost:3000/game/round/playForCash
 Content-Type: application/json
 
 {
 	"userId": "Jan",
-	"betAmount": 20
+	"betAmount": 13
 }
 
 
-###
+### Play for free
 POST http://localhost:3000/game/round/playForFree
 Content-Type: application/json
 
@@ -29,16 +29,16 @@ Content-Type: application/json
 }
 
 
-###
+### View user game history for a particular player
 GET http://localhost:3000/game-history/user/Jan
 Content-Type: application/json
 
-###
+### View game history for a particular game
 GET http://localhost:3000/game-history/gameId/0
 Content-Type: application/json
 
 
-###
+### View particular round
 GET http://localhost:3000/game-history/roundId/2
 Content-Type: application/json
 
