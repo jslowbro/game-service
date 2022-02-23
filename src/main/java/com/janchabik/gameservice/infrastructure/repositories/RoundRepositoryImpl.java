@@ -1,7 +1,7 @@
 package com.janchabik.gameservice.infrastructure.repositories;
 
 import com.janchabik.gameservice.UserContext;
-import com.janchabik.gameservice.api.GameHistoryService;
+import com.janchabik.gameservice.api.GameHistoryQueries;
 import com.janchabik.gameservice.api.RoundApiEvent;
 import com.janchabik.gameservice.api.RoundDTO;
 import com.janchabik.gameservice.domain.model.Round;
@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RoundRepositoryImpl implements RoundRepository, GameHistoryService {
+public class RoundRepositoryImpl implements RoundRepository, GameHistoryQueries {
 
 	private final Map<RoundEntity, List<RoundEvent>> roundMap = new HashMap<>();
 

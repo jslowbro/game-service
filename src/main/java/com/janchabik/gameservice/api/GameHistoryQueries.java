@@ -2,7 +2,7 @@ package com.janchabik.gameservice.api;
 
 import java.util.List;
 
-public interface GameHistoryService {
+public interface GameHistoryQueries {
 
 
 	List<RoundDTO> getRoundEventsForPlayer(String userId);

@@ -2,7 +2,7 @@ package com.janchabik.gameservice.rest;
 
 import com.janchabik.gameservice.UserContext;
 import com.janchabik.gameservice.api.GameApiService;
-import com.janchabik.gameservice.api.GameStateResponse;
+import com.janchabik.gameservice.api.GameStateDTO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,20 +17,20 @@ public class GameResource {
 	}
 
 	@PostMapping("/game/startGame")
-	public GameStateResponse startGame(@RequestBody GameStartMessage gameStartMessage) {
+	public GameStateDTO startGame(@RequestBody GameStartMessage gameStartMessage) {
 		UserContext.setContext(gameStartMessage.getUserId());
 		return gameApiService.startGame();
 	}
 
 	@PostMapping("/game/round/playForCash")
-	public GameStateResponse playRoundForCash(@RequestBody PlayRoundRequest playRoundRequest) {
+	public GameStateDTO playRoundForCash(@RequestBody PlayRoundRequest playRoundRequest) {
 		UserContext.setContext(playRoundRequest.getUserId());
 		return gameApiService.playCashRound(playRoundRequest.getBetAmount());
 	}
 
 
 	@PostMapping("/game/round/playForFree")
-	public GameStateResponse playRoundForFree(@RequestBody PlayRoundRequest playRoundRequest) {
+	public GameStateDTO playRoundForFree(@RequestBody PlayRoundRequest playRoundRequest) {
 		UserContext.setContext(playRoundRequest.getUserId());
 		return gameApiService.playFreeRound(playRoundRequest.getBetAmount());
 	}

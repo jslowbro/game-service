@@ -2,7 +2,7 @@ package com.janchabik.gameservice.api;
 
 import java.util.Objects;
 
-public class GameStateResponse {
+public class GameStateDTO {
 
 	private final int gameId;
 
@@ -10,7 +10,7 @@ public class GameStateResponse {
 
 	private final int cashBalance;
 
-	public GameStateResponse(int gameId, int numberOfFreeRounds, int cashBalance) {
+	public GameStateDTO(int gameId, int numberOfFreeRounds, int cashBalance) {
 		this.gameId = gameId;
 		this.numberOfFreeRounds = numberOfFreeRounds;
 		this.cashBalance = cashBalance;
@@ -37,7 +37,7 @@ public class GameStateResponse {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		GameStateResponse that = (GameStateResponse) o;
+		GameStateDTO that = (GameStateDTO) o;
 		return gameId == that.gameId && numberOfFreeRounds == that.numberOfFreeRounds && cashBalance == that.cashBalance;
 	}
 

@@ -2,10 +2,10 @@ package com.janchabik.gameservice.api;
 
 public interface GameApiService {
 
-	GameStateResponse startGame();
+	GameStateDTO startGame();
 
-	GameStateResponse playFreeRound(int betAmount);
+	GameStateDTO playFreeRound(int betAmount);
 
-	GameStateResponse playCashRound(int betAmount);
+	GameStateDTO playCashRound(int betAmount);
 
 }
