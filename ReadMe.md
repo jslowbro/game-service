@@ -33,7 +33,7 @@ Repository layer could be better, but the focus wasn't on that.
 Better auditng could be done - like adding aggregateVersion to GameState aggregate, timestamps and Policynames for RoundEvents.
 
 Integration tests (with SpringContext) could've been done to test domain + infrastructure + api. Since domain logic is tested extensively I didn't feel the need
-to add additional tests.
+to add additional tests. Also http requests in resources/http/requests.http could be made into a test suite running during CI.
 
 Better api docs could be added OpenAPI/Swagger but I was too lazy to do it. resources/http/requests.http should be enough for most people
 
