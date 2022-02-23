@@ -15,7 +15,7 @@ Content-Type: application/json
 
 {
 	"userId": "Jan",
-	"betAmount": 5
+	"betAmount": 8
 }
 
 
