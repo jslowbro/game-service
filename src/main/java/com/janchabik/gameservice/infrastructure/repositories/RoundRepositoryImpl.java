@@ -8,7 +8,6 @@ import com.janchabik.gameservice.domain.model.Round;
 import com.janchabik.gameservice.domain.model.RoundEvent;
 import com.janchabik.gameservice.domain.services.ports.RoundRepository;
 import com.janchabik.gameservice.infrastructure.configurable.GameConfigurationProvider;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,9 +36,7 @@ public class RoundRepositoryImpl implements RoundRepository, GameHistoryQueries 
 
 	@Override
 	public Round newRound(int gameId) {
-		RoundEntity roundEntity = new RoundEntity(UserContext.getUserId(), roundMap.size(), gameId);
-		roundMap.put(roundEntity, new ArrayList<>());
-		return new Round(roundEntity.getRoundId(), gameConfigurationProvider.getMinBet(), gameConfigurationProvider.getMaxBet());
+		return new Round(roundMap.size(), gameConfigurationProvider.getMinBet(), gameConfigurationProvider.getMaxBet());
 	}
 
 	@Override
