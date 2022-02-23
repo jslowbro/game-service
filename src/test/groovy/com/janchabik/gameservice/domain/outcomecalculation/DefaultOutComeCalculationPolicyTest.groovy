@@ -24,6 +24,16 @@ class DefaultOutComeCalculationPolicyTest extends Specification {
 		
 	}
 	
+	def 'shouldnt throw when RNG supplies a number between 1 and 100'() {
+		when:
+		for (int i = 1; i <= 100; i++) {
+			new DefaultOutComeCalculationPolicy(mockRandomNumberProvider(i, i)).calculateGameOutCome(i)
+		}
+		then:
+		noExceptionThrown()
+		
+		
+	}
 	
 	def mockRandomNumberProvider(int firstNumber, int secondNumber) {
 		return Mock(RandomNumberProvider) {
