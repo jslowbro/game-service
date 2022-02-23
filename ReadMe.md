@@ -19,10 +19,11 @@ Domain logic is contained within 2 Aggregates (Round and GameState) and a set of
 in groovy/com/janchabik/gameservice/domain
 
 Extensibility is realised through set of GameConfigurationProvider (to change default values for startingCash etc.) and set of Policies that can be added,
-removed, changed rather easily since domain logic depends only on their interfaces.
+removed, changed rather easily since domain logic depends only on their interfaces. Fe. OutComeCalculationPolicy is provisioned through a factory, which in 
+this case is an overkill, but the purpose was to showcase possible extensibility ie. providing different policies based on external factors.
 
-Readability and reflecting domain over code writing less code. For example PlayingForFreeBetDeductionPolicy and PlayingForFreeBetDeductionPolicy do the same
-thing yet they're different from domain perspective.
+Readability and reflecting domain over writing less code. For example PlayingForFreeBetDeductionPolicy and PlayingForFreeBetDeductionPolicy do the same thing
+yet they're different from domain perspective hence separate classes.
 
 ## Known limitations
 

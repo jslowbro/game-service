@@ -1,5 +1,7 @@
 package com.janchabik.gameservice.domain.model;
 
+import java.util.Objects;
+
 // TODO add timestamps for better tracking
 public interface RoundEvent {
 
@@ -28,6 +30,23 @@ public interface RoundEvent {
 		public Type getType() {
 			return type;
 		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) {
+				return true;
+			}
+			if (o == null || getClass() != o.getClass()) {
+				return false;
+			}
+			BalanceDeductedEvent that = (BalanceDeductedEvent) o;
+			return balanceDeducted == that.balanceDeducted;
+		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(balanceDeducted);
+		}
 	}
 
 	class CashWonEvent implements RoundEvent {
@@ -48,6 +67,23 @@ public interface RoundEvent {
 		public int getCashWonAmount() {
 			return cashWonAmount;
 		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) {
+				return true;
+			}
+			if (o == null || getClass() != o.getClass()) {
+				return false;
+			}
+			CashWonEvent that = (CashWonEvent) o;
+			return cashWonAmount == that.cashWonAmount;
+		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(cashWonAmount);
+		}
 	}
 
 	class FreeRoundsWonEvent implements RoundEvent {
@@ -67,6 +103,23 @@ public interface RoundEvent {
 		@Override
 		public Type getType() {
 			return type;
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) {
+				return true;
+			}
+			if (o == null || getClass() != o.getClass()) {
+				return false;
+			}
+			FreeRoundsWonEvent that = (FreeRoundsWonEvent) o;
+			return freeRoundsWon == that.freeRoundsWon;
+		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(freeRoundsWon);
 		}
 	}
 

@@ -2,6 +2,7 @@ package com.janchabik.gameservice.domain
 
 
 import com.janchabik.gameservice.domain.model.Round
+import com.janchabik.gameservice.domain.model.RoundEvent
 import com.janchabik.gameservice.domain.model.betdeduction.FreeRoundBetDeductionPolicy
 import com.janchabik.gameservice.domain.model.betdeduction.PlayingForCashRoundBetDeductionPolicy
 import com.janchabik.gameservice.domain.model.betdeduction.PlayingForFreeBetDeductionPolicy
@@ -29,6 +30,19 @@ class RoundTest extends Specification {
 		10        | PlayingForFreeBetDeductionPolicy.INSTANCE      | mockOutComeCalcStrategy(150, 4) || 150            || 4
 		9         | FreeRoundBetDeductionPolicy.INSTANCE           | mockOutComeCalcStrategy(80, 0)  || 80             || 0
 		9         | FreeRoundBetDeductionPolicy.INSTANCE           | mockOutComeCalcStrategy(80, 8)  || 80             || 8
+	}
+	
+	
+	def 'should generate correct events base on playing a round'() {
+		given:
+		def round = new Round(1, 1, 10)
+		when:
+		round.playRound(10, PlayingForCashRoundBetDeductionPolicy.INSTANCE, mockOutComeCalcStrategy(40, 3))
+		def events = round.flushEvents() as Set
+		then:
+		events.contains(new RoundEvent.BalanceDeductedEvent(10))
+		events.contains(new RoundEvent.CashWonEvent(40))
+		events.contains(new RoundEvent.FreeRoundsWonEvent(3))
 	}
 	
 	def 'should throw IllegalArgumentException when betAmount is not withing bounds'() {
